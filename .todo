@@ -1,0 +1,40 @@
+General:
+    ✔ Go to projects folder @done(21-02-16 21:40)
+    ✔ Create a new envorinmient @done(21-02-16 21:41)
+    ✔ Run cookiecutter for a selected type of project @done(21-02-16 21:41)
+    ✔ Go inside project folder @done(21-02-16 21:41)
+    ✔ Create files (pyproject.toml, .todo, .env) @done(21-02-17 11:48)
+    ☐ Add dev dependencies from requirements.txt with poetry add @low
+    ✔ Create local git repository @done(21-02-17 11:52)
+    ✔ Create remote repository @done(21-02-17 11:52)
+    ✔ Add remote repository (option to create commit or exit) @done(21-02-17 11:52)
+    ✔ Stage changes and commit (option for first commit message) @done(21-02-17 11:53)
+    ✔ Push to remote @done(21-02-17 11:53)
+✔ @done(21-02-17 11:53)
+Commands:
+    init:
+        First time using the CLI. Setup.
+        ✔ Specify projects directory @done(21-02-16 16:13)
+        ✔ Link your github account. Using Github CLI. @done(21-02-16 16:14)
+        ✘ Save token in env @cancelled(21-02-16 16:14)
+        ✔ create a config file @done(21-02-17 19:52)
+
+    new:
+        Create a new project
+        ✔ Ask if create environment (y/n) @done(21-02-16 21:00)
+        ✔ Create using conda or pyenv-virtualenv @done(21-02-16 21:00)
+        ✔ Activate environment @done(21-02-16 21:00)
+        ✔ Run cookiecutter from list of curated cookiecutter @done(21-02-16 21:41)
+
+    add:
+        ✔ Add cookiecutter to curated list, have an alias for  each cookiecutter. (JSon) @done(21-02-17 15:58)
+
+    push:
+        Create local, remote and push
+        ✔ Create local git @done(21-02-17 12:48)
+        ✔ Create remote github @done(21-02-17 12:48)
+        ✔ Stage and commit @done(21-02-17 12:48)
+        ✔ Push to remote @done(21-02-17 12:48)
+
+    list:
+        ✔ List cookiecutter templates available @done(21-02-17 17:28)
