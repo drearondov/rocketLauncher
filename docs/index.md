@@ -1,5 +1,4 @@
-Welcome to projects-cli's documentation!
-======================================
+# Welcome to projects-cli's documentation!
 
 .. toctree::
    :maxdepth: 2
@@ -13,8 +12,7 @@ Welcome to projects-cli's documentation!
    authors
    history
 
-Indices and tables
-==================
+##  Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`

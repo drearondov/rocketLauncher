@@ -12,47 +12,36 @@ settings = typer.Typer()
 
 @settings.command()
 def init(
-    env_manager: str = typer.Option(
-        None,
-        help="Environment manager to use by default"
-    ),
+    env_manager: str = typer.Option(None, help="Environment manager to use by default"),
     create_env: bool = typer.Option(
-        None,
-        help="Create a virtual environment by default"
+        None, help="Create a virtual environment by default"
     ),
     poetry_adapted: bool = typer.Option(
-        None,
-        help="Are the cookiecutters used adapted for Poetry by default"
+        None, help="Are the cookiecutters used adapted for Poetry by default"
     ),
-    upload_github: bool = typer.Option(
-        None,
-        help="Upload to github by default"
-    ),
-    commit_message: str = typer.Option(
-        None,
-        help="Deafult commit message"
-    ),
+    upload_github: bool = typer.Option(None, help="Upload to github by default"),
+    commit_message: str = typer.Option(None, help="Deafult commit message"),
     quickstart: bool = typer.Option(
-        None,
-        help="Use quickstart by default or interactive prompt"
-    )
+        None, help="Use quickstart by default or interactive prompt"
+    ),
 ) -> None:
     """
     Define default configuration
     """
-    create_config(env_manager, create_env, poetry_adapted, upload_github, commit_message, quickstart)
+    create_config(
+        env_manager,
+        create_env,
+        poetry_adapted,
+        upload_github,
+        commit_message,
+        quickstart,
+    )
 
 
 @settings.command()
 def change(
-    key: str = typer.Option(
-        None,
-        help="Name of the value to change"
-    ),
-    new_value: str = typer.Option(
-        None,
-        help="New default value"
-    )
+    key: str = typer.Option(None, help="Name of the value to change"),
+    new_value: str = typer.Option(None, help="New default value"),
 ) -> None:
     """
     Change a default
@@ -62,24 +51,27 @@ def change(
             "type": "input",
             "name": "alias",
             "message": "What default do you want to change?: ",
-            "when": lambda answers : key is None
+            "when": lambda answers: key is None,
         },
         {
             "type": "input",
             "name": "link",
             "message": "What's the new value?: ",
-            "when": lambda answers : new_value is None
-        }
+            "when": lambda answers: new_value is None,
+        },
     ]
 
-    parameters = prompt(questions, style=prompt_style)
+    try:
+        parameters = prompt(questions, style=prompt_style)
 
-    if key is None:
-        key = parameters["key"]
-    
-    if new_value is None:
-        new_value = parameters["new_value"]
-    
+        if key is None:
+            key = parameters["key"]
+
+        if new_value is None:
+            new_value = parameters["new_value"]
+    except AssertionError:
+        pass
+
     config["defaults"][key] = new_value
 
     with open(Path(str(CONFIG_FILE)), "w") as configfile:

@@ -7,7 +7,10 @@ import typer
 from pathlib import Path
 from PyInquirer import prompt
 
-from rocket_launcher import prompt_style, config, PROJECTS_DIR, CONFIG_FILE
+from rocket_launcher import prompt_style, config, CONFIG_FILE
+
+
+PROJECTS_DIR = config["general"]["projects_dir"]
 
 
 def create_config(
@@ -16,7 +19,7 @@ def create_config(
     poetry_adapted: bool = None,
     upload_github: bool = None,
     commit_message: str = None,
-    quickstart: bool = None
+    quickstart: bool = None,
 ) -> None:
 
     questions = [
@@ -25,38 +28,38 @@ def create_config(
             "name": "env_manager",
             "message": "What environment manager do you use?: ",
             "choices": ["pyenv", "conda"],
-            "when": lambda answers : env_manager is None
+            "when": lambda answers: env_manager is None,
         },
         {
             "type": "confirm",
             "name": "create_env",
             "message": "Create a new virtual environment?: ",
-            "when": lambda answers : create_env is None
+            "when": lambda answers: create_env is None,
         },
         {
             "type": "confirm",
             "name": "poetry_adapted",
             "message": "Does your cookiecutters work with Poetry by default?: ",
-            "when": lambda answers : poetry_adapted is None
+            "when": lambda answers: poetry_adapted is None,
         },
         {
             "type": "confirm",
             "name": "upload_github",
             "message": "Upload to github?: ",
-            "when": lambda answers : upload_github is None
+            "when": lambda answers: upload_github is None,
         },
         {
             "type": "input",
             "name": "commit_message",
             "message": "Deafult commit message?: ",
-            "when": lambda answers : commit_message is None
+            "when": lambda answers: commit_message is None,
         },
         {
             "type": "confirm",
             "name": "quickstart",
             "message": "Use defaults when creating new projects?: ",
-            "when": lambda answers : quickstart is None
-        }
+            "when": lambda answers: quickstart is None,
+        },
     ]
 
     try:
@@ -70,13 +73,21 @@ def create_config(
         config["defaults"]["commit_message"] = str(parameters["commit_message"])
         config["defaults"]["quickstart"] = str(parameters["quickstart"])
 
-        with open(Path(str(CONFIG_FILE)), "w") as configfile:
-            config.write(configfile)
-
-        typer.echo("\nDefaults set, you're good to go!")
     except KeyError:
         typer.Abort()
 
+    except AssertionError:
+        config["defaults"]["env_manager"] = str(env_manager)
+        config["defaults"]["create_env"] = str(create_env)
+        config["defaults"]["poetry_adapted"] = str(poetry_adapted)
+        config["defaults"]["upload_github"] = str(upload_github)
+        config["defaults"]["commit_message"] = str(commit_message)
+        config["defaults"]["quickstart"] = str(quickstart)
+
+    with open(CONFIG_FILE, "w") as configfile:
+        config.write(configfile)
+
+    typer.echo("\nDefaults set, you're good to go!")
 
 
 def create_project(
@@ -85,9 +96,9 @@ def create_project(
     create_env: bool,
     cookiecutter: str,
     upload_github: bool,
-    commit_message: str
+    commit_message: str,
 ) -> None:
-    
+
     if create_env is True:
         if env_manager == "pyenv":
             subprocess.run([env_manager, "virtualenv", project_name])
@@ -109,7 +120,7 @@ def create_project(
         f.close()
 
     subprocess.run(["git", "init"])
-    
+
     if upload_github:
         upload_to_github(commit_message)
 
@@ -120,12 +131,11 @@ def install_dependencies(package_manager: str):
     elif package_manager == "conda":
         subprocess.run([package_manager, "install", "--file", "requirements.txt"])
     elif package_manager == "poetry":
-        dependencies = {}
-        
         # Install requirements.txt with poetry
         pass
     else:
-        return "Package manager not supported, if your want to propose a feature, submit a request or read the CONTRIBUTING guidelines."
+        return "Package manager not supported, if your want to propose a feature, submit a request or read\
+        the CONTRIBUTING guidelines."
 
 
 def upload_to_github(commit_message: str) -> None:

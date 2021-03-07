@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Install dependencies from cookiecutter
 * Switch from setup.py to pyproject.toml
+* Full documentation
 
 ## [0.1.0-alpha] - 2021-02-17
 
@@ -16,3 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * `init`, `new`, `push`, `cookiecutters` and `config` commands
 * `config` commands `cookiecutter`, `init`
+
+## [0.1.0] - 2021-03-07
+
+### Added
+* `cookiecutters` commands `add` and `list`
+* Built test suite and setup Travis CI

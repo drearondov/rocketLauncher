@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "rocket_launcher"
-version = "0.1.0-alpha"
+version = "0.1.0"
 description = "CLI for project automation. Create folder, add cookiecutter and create and commit to Github"
 authors = ["drearondov <andrea.estefania.rv@gmail.com>"]
 license = "GPL-3.0"
-readme = "README.rst"
+readme = "README.md"
+exclude= ["rocket_launcher/config.ini"]
 
 [tool.poetry.scripts]
 rocketlauncher = "rocket_launcher.main:app"
@@ -27,6 +28,13 @@ watchdog = "^2.0.0"
 coverage = "^5.4"
 twine = "^3.3.0"
 click = "^7.1.2"
+flake8 = "^3.8.4"
+black = "^20.8b1"
+pytest-mock = "^3.5.1"
+pytest-subprocess = "^1.0.0"
+pytest-cov = "^2.11.1"
+tox-pyenv = "^1.1.0"
+recommonmark = "^0.7.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

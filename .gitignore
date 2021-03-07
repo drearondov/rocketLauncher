@@ -103,3 +103,7 @@ ENV/
 
 # IDE settings
 .vscode/
+
+# User settings
+rocket_launcher/config.ini
+.todo
