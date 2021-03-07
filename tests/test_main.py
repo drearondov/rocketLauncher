@@ -11,9 +11,7 @@ def test_init(init, cli_runner, monkeypatch):
 
     from rocket_launcher.main import app
 
-    PROJECTS_DIR = str(test_projects)
-
-    result = cli_runner.invoke(app, ["init", "--projects-path", PROJECTS_DIR, "--no-set-config"])
+    result = cli_runner.invoke(app, ["init", "--projects-path", test_projects, "--no-set-config"])
 
     assert result.exit_code == 0
 

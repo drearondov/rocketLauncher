@@ -14,10 +14,6 @@ script: tox
 deploy:
   provider: script
   script: poetry publish -r rocketLauncher
-  distributions: sdist bdist_wheel
-  user: drearondov
-  password:
-    secure: 16Rocket&Launcher22
   on:
     tags: true
     repo: drearondov/rocket_launcher

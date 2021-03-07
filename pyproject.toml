@@ -35,6 +35,7 @@ pytest-subprocess = "^1.0.0"
 pytest-cov = "^2.11.1"
 tox-pyenv = "^1.1.0"
 recommonmark = "^0.7.1"
+tox-travis = "^0.12"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
