@@ -3,11 +3,13 @@ import pytest
 from configparser import ConfigParser
 
 
-def test_init(init, cli_runner, monkeypatch):
+def test_init(init, cli_runner, monkeypatch, fake_process):
 
     test_projects, test_config_path = init
 
     monkeypatch.setenv("CONFIG_FILE", str(test_config_path))
+
+    fake_process.register_subprocess(["gh", "auth", "login", fake_process.any()])
 
     from rocket_launcher.main import app
 
