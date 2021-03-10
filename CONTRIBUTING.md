@@ -49,36 +49,47 @@ If you are proposing a feature:
 Ready to contribute? Here's how to set up `rocket_launcher` for local development.
 
 1. Fork the `rocket_launcher` repo on GitHub.
-2. Clone your fork locally::
+2. Clone your fork locally and install dependencies.
 
-    $ git clone git@github.com:your_name_here/rocket_launcher.git
+```bash
+    git clone git@github.com:your_name_here/rocket_launcher.git
+    cd rocket_launcher/
+```
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Create a virtualenv. Assuming you have pyenv-virtualenv installed, this is how you set up your fork for local development
 
-    $ mkvirtualenv rocket_launcher
-    $ cd rocket_launcher/
-    $ python setup.py develop
+``` bash
+    pyenv virtualenv rocket_launcher
+    pyenv activate rocket_launcher
+    poetry install
+```
 
-4. Create a branch for local development::
+4. Create a branch for local development
 
-    $ git checkout -b name-of-your-bugfix-or-feature
+```bash
+    git checkout -b name-of-your-bugfix-or-feature
+```
 
    Now you can make your changes locally.
 
 5. When you're done making changes, check that your changes pass flake8 and the
-   tests, including testing other Python versions with tox::
+   tests, including testing other Python versions with tox
 
-    $ flake8 rocket_launcher tests
-    $ python setup.py test or pytest
-    $ tox
+```bash
+    flake8 rocket_launcher tests
+    pytest
+    tox
+```
 
    To get flake8 and tox, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to GitHub::
 
-    $ git add .
-    $ git commit -m "Your detailed description of your changes."
-    $ git push origin name-of-your-bugfix-or-feature
+```bash
+    git add .
+    git commit -m "Your detailed description of your changes."
+    git push origin name-of-your-bugfix-or-feature
+```
 
 7. Submit a pull request through the GitHub website.
 
@@ -96,19 +107,22 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Tips
 
-To run a subset of tests::
+To run a subset of tests
 
-
-    $ python -m unittest tests.test_rocket_launcher
+```bash
+    pytest tests/test_cookiecutters.py
+```
 
 ## Deploying
 
 A reminder for the maintainers on how to deploy.
-Make sure all your changes are committed (including an entry in HISTORY.rst).
+Make sure all your changes are committed (including an entry in CHANGELOG.md).
 Then run::
 
-$ bump2version patch # possible: major / minor / patch
-$ git push
-$ git push --tags
+```bash
+    bump2version patch # possible: major / minor / patch
+    git push
+    git push --tags
+```
 
-Travis will then deploy to PyPI if tests pass.
+Travis will then deploy to the repository if the tests pass.

@@ -1,51 +1,59 @@
-.. highlight:: shell
+# Installation
 
-============
-Installation
-============
+Since the nature of this package is very opinionated (meaning, made with me in mind) I will not be publishing to `pypi`. But if you would like to use it, this are the installation steps.
 
+## Prerequisites
 
-Stable release
---------------
+For rocketLauncher to work the followinng packages need to be installed.
 
-To install projects-cli, run this command in your terminal:
+* [pyenv](https://github.com/pyenv/pyenv)
+* [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
+* [conda](https://docs.conda.io/projects/conda/en/latest/index.html)
+* [cookiecutter](https://github.com/audreyr/cookiecutter)
+* [git](https://git-scm.com)
+* [GithubCLI](https://cli.github.com)
 
-.. code-block:: console
+Once installed you can use the following code to get the latest release.
 
-    $ pip install rocket_launcher
+```bash
+    repo='https://github.com/drearondov/rocketLauncher'
 
-This is the preferred method to install projects-cli, as it will always install the most recent stable release.
+    # Find the latest release.
+    latest=$(git ls-remote --tags --refs $repo | # Fetch remote tags.
+                     sort -t '/' -k 3 -V |       # Sort them by version.
+                     tail -n 1 |                 # Take the latest one.
+                     awk -F / '{print $3}')      # Return only the tag.
 
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
+    # Craft the URL for the release asset.
+    version=$(echo $latest | tr -d 'v')  # Remove the leading v.
+    wheel="rocket_launcher-${version}-py3-none-any.whl"
+    release="${repo}/releases/download/${latest}/${wheel}"
 
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+    # Install the release.
+    pip install $release
+```
 
+## From sources
 
-From sources
-------------
+The sources for rocketLauncher can be downloaded from the [Github repo](https://github.com/drearondov/rocket_launcher).
 
-The sources for projects-cli can be downloaded from the `Github repo`_.
+Bear in mind that to install this package from source you will need to have [Poetry](https://python-poetry.org) installed in your system.
 
-You can either clone the public repository:
+With that in mind, you can either clone the public repository:
 
-.. code-block:: console
+```bash 
+    git clone git://github.com/drearondov/rocket_launcher
+```
 
-    $ git clone git://github.com/drearondov/rocket_launcher
+Or download the [tarball](https://github.com/drearondov/rocket_launcher/tarball/master):
 
-Or download the `tarball`_:
-
-.. code-block:: console
-
-    $ curl -OJL https://github.com/drearondov/rocket_launcher/tarball/master
+```bash
+    curl -OJL https://github.com/drearondov/rocket_launcher/tarball/master
+```
 
 Once you have a copy of the source, you can install it with:
 
-.. code-block:: console
-
-    $ python setup.py install
-
-
-.. _Github repo: https://github.com/drearondov/rocket_launcher
-.. _tarball: https://github.com/drearondov/rocket_launcher/tarball/master
+```bash
+    poetry build
+    poetry install
+```
