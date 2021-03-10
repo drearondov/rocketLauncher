@@ -37,6 +37,7 @@ tox-pyenv = "^1.1.0"
 recommonmark = "^0.7.1"
 tox-travis = "^0.12"
 typer-cli = "^0.0.11"
+python-dotenv = "^0.15.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
